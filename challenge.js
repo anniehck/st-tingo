@@ -10,3 +10,7 @@ var tagline = tagElement.find('h3').html();
 var hotelListings = $('#hotel_listings');
 var hotelCount = hotelListings.find('li.tabsParent').length;
 var insertString = hotelCount + ' out of';
+
+var split = tagline.split(' ');
+split.splice(1, 0, insertString);
+var resultString = split.join(' ');
