@@ -14,3 +14,4 @@ var insertString = hotelCount + ' out of';
 var split = tagline.split(' ');
 split.splice(1, 0, insertString);
 var resultString = split.join(' ');
+tagElement.find('h3').html(resultString);
