@@ -27,3 +27,6 @@ var replaceTagline = (initialLength) => {
 }
 
 $(window).on("scroll", replaceTagline(initial), replaceTagline);
+
+// Task 3
+$('a.do_show_rates').attr('target', '_blank');
