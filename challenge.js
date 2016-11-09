@@ -41,3 +41,10 @@ selectedHotels.find('.header').append('<div class="title">Selected Hotels</div>'
 
 var fillerText = '<li><em>Nothing selected yet!</em></li>';
 selectedHotels.find('.content').html(`<ul id="selected">${fillerText}</ul>`).css('color', '#bbb');
+
+$('a.do_show_rates').on('click', function(event) {
+  event.preventDefault();
+  var hotelInfo = $(this).parent().parent().parent();
+  var name = hotelInfo.find('.title').text();
+  console.log(name);
+});
