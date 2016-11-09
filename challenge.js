@@ -50,6 +50,10 @@ $('a.do_show_rates').on('click', function(event) {
   var list = $('ul#selected').find('li');
   var selected = [];
 
+  if (list[0].textContent === 'Nothing selected yet!') {
+   list[0].remove();
+  }
+
   for (var i = 0; i < list.length; i++) {
     selected.push(list[i].innerHTML);
   }
