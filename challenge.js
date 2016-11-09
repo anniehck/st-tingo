@@ -40,10 +40,10 @@ var selectedHotels = $('#selected_hotels');
 var fillerText = '<li><em>Nothing selected yet!</em></li>';
 
 selectedHotels.find('.header').append('<div class="title">Selected Hotels</div>');
-selectedHotels.find('.content').html(`<ul id="selected">${fillerText}</ul>`).css({'line-height': '1.6em', 'font-size': '.9em'});
+selectedHotels.find('.content').html('<ul id="selected">' + fillerText + '</ul>').css({'line-height': '1.6em', 'font-size': '.9em'});
 selectedHotels.find('em').css('color', '#bbb');
 
-$('a.do_show_rates').on('click', function(event) {
+$('a.do_show_rates').click(function(event) {
   event.preventDefault();
   var hotelInfo = $(this).parent().parent().parent();
   var name = hotelInfo.find('.title').text();
@@ -53,11 +53,10 @@ $('a.do_show_rates').on('click', function(event) {
   if (list[0].textContent === 'Nothing selected yet!') {
    list[0].remove();
   }
-
   for (var i = 0; i < list.length; i++) {
     selected.push(list[i].innerHTML);
   }
   if (!selected.includes(name)) {
-    $('ul#selected').append(`<li>${name}</li>`);
+    $('ul#selected').append('<li>' + name + '</li>');
   }
 });
