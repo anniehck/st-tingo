@@ -30,3 +30,8 @@ $(window).on("scroll", replaceTagline(initial), replaceTagline);
 
 // Task 3
 $('a.do_show_rates').attr('target', '_blank');
+
+var header = '<div class="header"></div>';
+var content = '<div class="content"></div>';
+
+$('.hotel_name_filter').after('<div class="row" id="selected_hotels">' + header + content + '</div>');
