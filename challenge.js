@@ -40,4 +40,4 @@ var selectedHotels = $('#selected_hotels');
 selectedHotels.find('.header').append('<div class="title">Selected Hotels</div>');
 
 var fillerText = '<li><em>Nothing selected yet!</em></li>';
-selectedHotels.find('.content').html(`<ul id="selected">${fillerText}</ul>`);
+selectedHotels.find('.content').html(`<ul id="selected">${fillerText}</ul>`).css('color', '#bbb');
