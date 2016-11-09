@@ -47,4 +47,13 @@ $('a.do_show_rates').on('click', function(event) {
   var hotelInfo = $(this).parent().parent().parent();
   var name = hotelInfo.find('.title').text();
   console.log(name);
+  var list = $('ul#selected').find('li');
+  var selected = [];
+
+  for (var i = 0; i < list.length; i++) {
+    selected.push(list[i].innerHTML);
+  }
+  if (!selected.includes(name)) {
+    $('ul#selected').append(`<li>${name}</li>`);
+  }
 });
