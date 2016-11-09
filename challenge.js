@@ -37,16 +37,16 @@ var content = '<div class="content"></div>';
 $('.hotel_name_filter').after('<div class="row" id="selected_hotels">' + header + content + '</div>');
 
 var selectedHotels = $('#selected_hotels');
-selectedHotels.find('.header').append('<div class="title">Selected Hotels</div>');
-
 var fillerText = '<li><em>Nothing selected yet!</em></li>';
-selectedHotels.find('.content').html(`<ul id="selected">${fillerText}</ul>`).css('color', '#bbb');
+
+selectedHotels.find('.header').append('<div class="title">Selected Hotels</div>');
+selectedHotels.find('.content').html(`<ul id="selected">${fillerText}</ul>`).css({'line-height': '1.6em', 'font-size': '.9em'});
+selectedHotels.find('em').css('color', '#bbb');
 
 $('a.do_show_rates').on('click', function(event) {
   event.preventDefault();
   var hotelInfo = $(this).parent().parent().parent();
   var name = hotelInfo.find('.title').text();
-  console.log(name);
   var list = $('ul#selected').find('li');
   var selected = [];
 
