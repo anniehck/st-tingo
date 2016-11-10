@@ -5,27 +5,26 @@ var checkOut = $('input.out_date_field').val();
 console.log(`${destination}: ${checkIn} - ${checkOut}`);
 
 // Task 2
-function replaceTagline(initialLength) {
+function replaceTagline() {
   var tagline = $('.listing_summary').find('h3').html();
+  var hotelTotal = tagline.split(' ')[1];
   var hotelCount = $('#hotel_listings').find('li.tabsParent').length;
-  var resultString;
-  if (tagline.length === initialLength) {
-    var insertString = `${hotelCount} out of`;
-    var split = tagline.split(' ');
-    split.splice(1, 0, insertString);
-    resultString = split.join(' ');
-  } else {
-    var split = tagline.split(' ');
-    split.splice(1, 1, hotelCount);
-    resultString = split.join(' ');
+  var split = tagline.split(' ');
+  var stubLength;
+  for (var i = 0; i < split.length; i++) {
+    if (split[split.length - i] > 0) {
+      stubLength = i;
+      break;
+    }
   }
+  var stub = split.slice(-stubLength).join(' ');
+  var insertString = `Searching ${hotelCount} out of `;
+  var resultString = insertString + stub;
   $('.listing_summary').find('h3').html(resultString);
 }
 
-var taglineLength = $('.listing_summary').find('h3').html().length;
-replaceTagline(taglineLength);
-
-$(window).scroll(replaceTagline);
+replaceTagline();
+setInterval(replaceTagline, 1000);
 
 // Task 3
 var header = '<div class="header"></div>';
