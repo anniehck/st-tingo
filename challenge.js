@@ -7,17 +7,16 @@ console.log(`${destination}: ${checkIn} - ${checkOut}`);
 // Task 2
 function replaceTagline() {
   var tagline = $('.listing_summary').find('h3').html();
-  var hotelTotal = tagline.split(' ')[1];
   var hotelCount = $('#hotel_listings').find('li.tabsParent').length;
-  var split = tagline.split(' ');
+  var tagWords = tagline.split(' ');
   var stubLength;
-  for (var i = 0; i < split.length; i++) {
-    if (split[split.length - i] > 0) {
+  for (var i = 0; i < tagWords.length; i++) {
+    if (tagWords[tagWords.length - i] > 0) {
       stubLength = i;
       break;
     }
   }
-  var stub = split.slice(-stubLength).join(' ');
+  var stub = tagWords.slice(-stubLength).join(' ');
   var insertString = `Searching ${hotelCount} out of `;
   var resultString = insertString + stub;
   $('.listing_summary').find('h3').html(resultString);
@@ -30,6 +29,7 @@ setInterval(replaceTagline, 1000);
 var header = '<div class="header"></div>';
 var content = '<div class="content"></div>';
 $('.hotel_name_filter').after(`<div class="row" id="selected_hotels">${header} ${content}</div>`);
+
 var selectedHotels = $('#selected_hotels');
 var fillerText = '<li><em>Nothing selected yet!</em></li>';
 
