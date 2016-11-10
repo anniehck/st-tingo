@@ -2,48 +2,48 @@
 var destination = $('input.destination').val();
 var checkIn = $('input.in_date_field').val();
 var checkOut = $('input.out_date_field').val();
+console.log(`${destination}: ${checkIn} - ${checkOut}`);
 
 // Task 2
-var tagline = $('.listing_summary').find('h3').html();
-var initial = tagline.length;
-
-var replaceTagline = (initialLength) => {
-  var tagElement = $('.listing_summary');
-  var tagline = tagElement.find('h3').html();
+function replaceTagline(initialLength) {
+  var tagline = $('.listing_summary').find('h3').html();
   var hotelCount = $('#hotel_listings').find('li.tabsParent').length;
-  var split;
   var resultString;
   if (tagline.length === initialLength) {
-    var insertString = hotelCount + ' out of';
-    split = tagline.split(' ');
+    var insertString = `${hotelCount} out of`;
+    var split = tagline.split(' ');
     split.splice(1, 0, insertString);
     resultString = split.join(' ');
   } else {
-    split = tagline.split(' ');
+    var split = tagline.split(' ');
     split.splice(1, 1, hotelCount);
     resultString = split.join(' ');
   }
-  tagElement.find('h3').html(resultString);
+  $('.listing_summary').find('h3').html(resultString);
 }
 
-$(window).on("scroll", replaceTagline(initial), replaceTagline);
+var taglineLength = $('.listing_summary').find('h3').html().length;
+replaceTagline(taglineLength);
+
+$(window).scroll(replaceTagline);
 
 // Task 3
-$('a.do_show_rates').attr('target', '_blank');
-
 var header = '<div class="header"></div>';
 var content = '<div class="content"></div>';
-
-$('.hotel_name_filter').after('<div class="row" id="selected_hotels">' + header + content + '</div>');
-
+$('.hotel_name_filter').after(`<div class="row" id="selected_hotels">${header} ${content}</div>`);
 var selectedHotels = $('#selected_hotels');
 var fillerText = '<li><em>Nothing selected yet!</em></li>';
 
 selectedHotels.find('.header').append('<div class="title">Selected Hotels</div>');
-selectedHotels.find('.content').html('<ul id="selected">' + fillerText + '</ul>').css({'line-height': '1.6em', 'font-size': '.9em'});
+selectedHotels.find('.content').html(`<ul id="selected">${fillerText}</ul>`).css({'line-height': '1.7em', 'font-size': '.9em'});
 selectedHotels.find('em').css('color', '#bbb');
 
-$('a.do_show_rates').click(function() {
+$(document).on('click', 'a.do_show_rates', function(e) {
+  // Task 3-A
+  e.preventDefault();
+  window.open(e.target.href, '_blank');
+
+  // Task 3-B
   var hotelInfo = $(this).parent().parent().parent();
   var name = hotelInfo.find('.title').text();
   var list = $('ul#selected').find('li');
@@ -53,9 +53,10 @@ $('a.do_show_rates').click(function() {
    list[0].remove();
   }
   for (var i = 0; i < list.length; i++) {
-    selected.push(list[i].innerHTML);
+    selected.push(list[i].innerText);
   }
   if (!selected.includes(name)) {
-    $('ul#selected').append('<li>' + name + '</li>');
+    var link = `<a href="${e.target.href}" target="_blank">${name}</a>`;
+    $('ul#selected').append(`<li>${link}</li>`).find('a').css('text-decoration', 'none');
   }
 });
