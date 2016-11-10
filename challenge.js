@@ -1,10 +1,10 @@
-// TASK 1
+// Task 1
 var destination = $('input.destination').val();
 var checkIn = $('input.in_date_field').val();
 var checkOut = $('input.out_date_field').val();
 console.log(`${destination}: ${checkIn} - ${checkOut}`);
 
-// TASK 2
+// Task 2
 function replaceTagline(initialLength) {
   var tagline = $('.listing_summary').find('h3').html();
   var hotelCount = $('#hotel_listings').find('li.tabsParent').length;
@@ -27,7 +27,7 @@ replaceTagline(taglineLength);
 
 $(window).scroll(replaceTagline);
 
-// TASK 3
+// Task 3
 var header = '<div class="header"></div>';
 var content = '<div class="content"></div>';
 $('.hotel_name_filter').after(`<div class="row" id="selected_hotels">${header} ${content}</div>`);
@@ -39,11 +39,11 @@ selectedHotels.find('.content').html(`<ul id="selected">${fillerText}</ul>`).css
 selectedHotels.find('em').css('color', '#bbb');
 
 $(document).on('click', 'a.do_show_rates', function(e) {
-  // TASK 3-A
+  // Task 3-A
   e.preventDefault();
   window.open(e.target.href, '_blank');
 
-  // TASK 3-B
+  // Task 3-B
   var hotelInfo = $(this).parent().parent().parent();
   var name = hotelInfo.find('.title').text();
   var list = $('ul#selected').find('li');
