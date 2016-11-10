@@ -9,10 +9,17 @@ function replaceTagline() {
   var tagline = $('.listing_summary').find('h3').html();
   var hotelTotal = tagline.split(' ')[1];
   var hotelCount = $('#hotel_listings').find('li.tabsParent').length;
-  var resultString;
-  var stub = tagline.split(' ').slice(-4).join(' ');
+  var split = tagline.split(' ');
+  var stubLength;
+  for (var i = 0; i < split.length; i++) {
+    if (split[split.length - i] > 0) {
+      stubLength = i;
+      break;
+    }
+  }
+  var stub = split.slice(-stubLength).join(' ');
   var insertString = `Searching ${hotelCount} out of `;
-  resultString = insertString + stub;
+  var resultString = insertString + stub;
   $('.listing_summary').find('h3').html(resultString);
 }
 
