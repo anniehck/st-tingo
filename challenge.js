@@ -1,29 +1,27 @@
-// Task 1
+// TASK 1
 var destination = $('input.destination').val();
 var checkIn = $('input.in_date_field').val();
 var checkOut = $('input.out_date_field').val();
 console.log(`${destination}: ${checkIn} - ${checkOut}`);
 
-// Task 2
-function replaceTagline() {
-  var tagline = $('.listing_summary').find('h3').html();
+// TASK 2
+function updateTagline() {
+  var tagline = $('.listing_summary > h3').html();
   var hotelCount = $('#hotel_listings').find('li.tabsParent').length;
   var tagWords = tagline.split(' ');
-  var stubLength;
-  for (var i = 0; i < tagWords.length; i++) {
-    if (tagWords[tagWords.length - i] > 0) {
-      stubLength = i;
-      break;
-    }
+  if (tagWords.includes('Searching')) {
+    // Replace initial tagline
+    var newTagline = `Showing ${hotelCount} out of`;
+    $('.listing_summary > h3').html(tagline.replace('Searching', newTagline));
+  } else {
+    // Update just the current hotel count
+    tagWords.splice(1, 1, hotelCount);
+    $('.listing_summary > h3').html(tagWords.join(' '));
   }
-  var stub = tagWords.slice(-stubLength).join(' ');
-  var insertString = `Searching ${hotelCount} out of `;
-  var resultString = insertString + stub;
-  $('.listing_summary').find('h3').html(resultString);
 }
 
-replaceTagline();
-setInterval(replaceTagline, 1000);
+updateTagline();
+setInterval(updateTagline, 1000);
 
 // Task 3
 var header = '<div class="header"></div>';
@@ -45,7 +43,7 @@ $(document).on('click', 'a.do_show_rates', function(e) {
   // Task 3-B
   var hotelInfo = $(this).parent().parent().parent();
   var name = hotelInfo.find('.title').text();
-  var list = $('ul#selected').find('li');
+  var list = $('ul#selected > li');
   var selected = [];
 
   if (list[0].textContent === 'Nothing selected yet!') {
